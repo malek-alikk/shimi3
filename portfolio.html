@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أعمالنا - استوديو النور</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            width: 100%;
+            padding: 20px 50px;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .page-header {
+            padding: 150px 50px 80px;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%);
+        }
+
+        .page-header h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-header p {
+            font-size: 20px;
+            color: #aaa;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 40px 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 40px 50px 100px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            aspect-ratio: 4/3;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 30px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+        }
+
+        .portfolio-overlay h3 {
+            font-size: 22px;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .portfolio-overlay p {
+            color: #667eea;
+            font-size: 14px;
+        }
+
+        footer {
+            background: #0a0a0a;
+            padding: 30px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            
+            .page-header h1 {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">📸 استوديو النور</a>
+            <ul class="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="about.html">من نحن</a></li>
+                <li><a href="portfolio.html">أعمالنا</a></li>
+                <li><a href="contact.html">تواصل معنا</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <h1>معرض أعمالنا</h1>
+        <p>استعرض أفضل أعمالنا في التصوير الاحترافي</p>
+    </div>
+
+    <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all">الكل</button>
+        <button class="filter-btn" data-filter="wedding">أفراح</button>
+        <button class="filter-btn" data-filter="family">عائلات</button>
+        <button class="filter-btn" data-filter="graduation">تخرج</button>
+        <button class="filter-btn" data-filter="commercial">تجاري</button>
+        <button class="filter-btn" data-filter="portrait">بورتريه</button>
+    </div>
+
+    <div class="portfolio-grid">
+        <div class="portfolio-item" data-category="wedding">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=600&fit=crop" alt="حفل زفاف">
+            <div class="portfolio-overlay">
+                <h3>حفل زفاف أحمد وسارة</h3>
+                <p>تصوير أفراح</p>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="family">
+            <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=800&h=600&fit=crop" alt="جلسة عائلية">
+            <div class="portfolio-overlay">
+                <h3>عائلة السعيد</h3>
+                <p>تصوير عائلي</p>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="graduation">
+            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&h=600&fit=crop" alt="حفل تخرج">
+            <div class="portfolio-overlay">
+                <h3>حفل تخرج 2024</h3>
+                <p>تصوير تخرج</p>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="commercial">
+            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&h=600&fit=crop" alt="تصوير منتجات">
+            <div class="portfolio-overlay">
+                <h3>حملة إعلانية</h3>
+                <p>تصوير تجاري</p>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="portrait">
+            <img src="https://images.unsplash.com/photo-1516726817505-f5ed825624d8?w=800&h=600&fit=crop" alt="بورتريه">
+            <div class="portfolio-overlay">
+                <h3>جلسة بورتريه</h3>
+                <p>تصوير شخصي</p>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="wedding">
+            <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&h=600&fit=crop" alt="عروس">
+            <div class="portfolio-overlay">
+                <h3>جلسة العروس</h3>
+                <p>تصوير أفراح</p>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="family">
+            <img src="https://images.unsplash.com/photo-1475503572774-15a45e5d60b9?w=800&h=600&fit=crop" alt="عائلة">
+            <div class="portfolio-overlay">
+                <h3>لحظات عائلية</h3>
+                <p>تصوير عائلي</p>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="commercial">
+            <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800&h=600&fit=crop" alt="مطعم">
+            <div class="portfolio-overlay">
+                <h3>تصوير مطاعم</h3>
+                <p>تصوير تجاري</p>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="portrait">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop" alt="بورتريه رجل">
+            <div class="portfolio-overlay">
+                <h3>تصوير احترافي</h3>
+                <p>بورتريه</p>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="graduation">
+            <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800&h=600&fit=crop" alt="خريج">
+            <div class="portfolio-overlay">
+                <h3>يوم التخرج</h3>
+                <p>تصوير تخرج</p>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="wedding">
+            <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&h=600&fit=crop" alt="زواج">
+            <div class="portfolio-overlay">
+                <h3>حفل رومانسي</h3>
+                <p>تصوير أفراح</p>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="portrait">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&h=600&fit=crop" alt="بورتريه امرأة">
+            <div class="portfolio-overlay">
+                <h3>جلسة احترافية</h3>
+                <p>بورتريه</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Codium. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script>
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.getAttribute('data-filter');
+                
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                portfolioItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'block';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                        }, 10);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.8)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
